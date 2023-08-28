@@ -14,7 +14,7 @@
 
 ## Методы
 
-# /inbox
+### /inbox
 
 ```
 - /inbox
@@ -24,7 +24,7 @@
 - /spam
 ```
 
-# /inbox/{mail_id}
+### /inbox/{mail_id}
 
 ```
 - /inbox
@@ -34,7 +34,7 @@
 - /spam
 ```
 
-# /sent
+### /sent
 
 ```
 - /inbox
@@ -44,7 +44,7 @@
 - /spam
 ```
 
-# /sent/{mail_id}
+### /sent/{mail_id}
 
 ```
 - /inbox
@@ -54,7 +54,7 @@
 - /spam
 ```
 
-# /spam
+### /spam
 
 ```
 - /inbox
