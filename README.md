@@ -17,51 +17,37 @@
 ### /inbox
 
 ```
-- /inbox
-- /inbox/{mail_id}
-- /sent
-- /sent/{mail_id}
-- /spam
+- GET
+- DELETE
 ```
 
 ### /inbox/{mail_id}
 
 ```
-- /inbox
-- /inbox/{mail_id}
-- /sent
-- /sent/{mail_id}
-- /spam
+- GET
+- DELETE
 ```
 
 ### /sent
 
 ```
-- /inbox
-- /inbox/{mail_id}
-- /sent
-- /sent/{mail_id}
-- /spam
+- GET
+- POST
+- DELETE
 ```
 
 ### /sent/{mail_id}
 
 ```
-- /inbox
-- /inbox/{mail_id}
-- /sent
-- /sent/{mail_id}
-- /spam
+- GET
+- DELETE
 ```
 
 ### /spam
 
 ```
-- /inbox
-- /inbox/{mail_id}
-- /sent
-- /sent/{mail_id}
-- /spam
+- GET
+- DELETE
 ```
 
 ## Компоненты
