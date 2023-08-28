@@ -1,0 +1,303 @@
+openapi: "3.0.3"
+info:
+  title: "Почтовый клиент Thedus OpenAPI спецификация"
+  description: "Это документация к почтовому сервису Thedus. Сервис позволяет просматривать и управлять отправленными, входящими письмами, а также письмами, помеченными как спам."
+  version: "1.3"
+  termsOfService: "https://thedus.org/terms"
+  contact:
+    name: "Thedus API"
+    url: "https://thedus.org/api"
+    email: "thedus@gmail.com"
+  license:
+    name: "CC Attribution-ShareAlike 4.0 (CC BY-SA 4.0)"
+    url: "https://thedus.org/price"
+servers:
+  - url: https://api.thedus.org/data/1.3/
+    description: Production server
+  - url: http://beta.api.thedus.org/data/1.3/
+    description: Beta server
+tags:
+  - name: Inbox
+    description: Операции с входящими письмами.
+  - name: Sent
+    description: Операции с отправленными письмами.
+  - name: Spam
+    description: Операции с письмами в папке Спам.
+security:
+  - ApiKeyAuth: []
+paths:
+  /inbox:
+    get:
+      tags:
+        - Inbox
+      summary: Метод получения всех входящих писем.
+      operationId: getInbox
+      responses:
+        200:
+          description: Успешный ответ со списком входящих писем.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Inbox"
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления всех входящих писем.
+      tags:
+        - Inbox
+      operationId: clearInbox
+      responses:
+        200:
+          description: Успешное удаление всех входящих писем.
+          content:
+            application/json: {}
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /inbox/{mail_id}:
+    get:
+      tags:
+        - Inbox
+      summary: Метод получения входящего письма по идентификатору.
+      operationId: getInboxById
+      parameters:
+        - name: mail_id
+          in: path
+          required: true
+          description: Идентификатор письма.
+          schema:
+            type: string
+          example: 88sa-sjdw-2wfv-0029
+      responses:
+        200:
+          description: Успешный ответ с одним входящим письмом.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mail"
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления входящего письма по идентификатору.
+      tags:
+        - Inbox
+      operationId: deleteInboxById
+      parameters:
+        - name: mail_id
+          in: path
+          required: true
+          description: Идентификатор письма.
+          schema:
+            type: string
+          example: 88sa-sjdw-2wfv-0029
+      responses:
+        200:
+          description: Успешное удаление входящего письма.
+          content:
+            application/json: {}
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /sent:
+    get:
+      tags:
+        - Sent
+      summary: Метод получения всех отправленных писем.
+      operationId: getSent
+      responses:
+        200:
+          description: Успешный ответ со списком отправленных писем.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Sent"
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления письма в отправленные.
+      tags:
+        - Sent
+      operationId: createSent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Mail"
+      responses:
+        200:
+          description: Успешный ответ с одним отправленным письмом.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mail"
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления всех отправленных писем.
+      tags:
+        - Sent
+      operationId: clearSent
+      responses:
+        200:
+          description: Успешное удаление всех отправленных писем.
+          content:
+            application/json: {}
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /sent/{mail_id}:
+    get:
+      tags:
+        - Sent
+      summary: Метод получения отправленного письма по идентификатору.
+      operationId: getSentById
+      parameters:
+        - name: mail_id
+          in: path
+          required: true
+          description: Идентификатор письма.
+          schema:
+            type: string
+          example: 88sa-sjdw-2wfv-0029
+      responses:
+        200:
+          description: Успешный ответ с одним отправленным письмом.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Mail"
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления отправленного письма по идентификатору.
+      tags:
+        - Sent
+      operationId: deleteSentById
+      parameters:
+        - name: mail_id
+          in: path
+          required: true
+          description: Идентификатор письма.
+          schema:
+            type: string
+          example: 88sa-sjdw-2wfv-0029
+      responses:
+        200:
+          description: Успешное удаление отправленного письма.
+          content:
+            application/json: {}
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /spam:
+    get:
+      tags:
+        - Spam
+      summary: Метод получения всех писем из папки Спам.
+      operationId: getSpam
+      responses:
+        200:
+          description: Успешный ответ со списком писем из папки Спам.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Spam"
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления всех писем из папки Спам.
+      tags:
+        - Spam
+      operationId: clearSpam
+      responses:
+        200:
+          description: Успешное удаление всех писем из папки Спам.
+          content:
+            application/json: {}
+        500:
+          description: Что-то пошло не так.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: KEY
+  schemas:
+    Mail:
+      type: object
+      required:
+        - sender
+        - recipient
+      properties:
+        mail_id:
+          type: string
+          example: 88sa-sjdw-2wfv-0029
+        sender:
+          type: string
+          example: sender_email@mailbox.com
+        recipient:
+          type: string
+          example: recipient_email@mailbox.com
+    Inbox:
+      type: array
+      items:
+        $ref: "#/components/schemas/Mail"
+    Sent:
+      type: array
+      items:
+        $ref: "#/components/schemas/Mail"
+    Spam:
+      type: array
+      items:
+        $ref: "#/components/schemas/Mail"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
