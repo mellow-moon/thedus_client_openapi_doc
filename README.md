@@ -12,6 +12,58 @@
 - /spam
 ```
 
+## Методы
+
+# /inbox
+
+```
+- /inbox
+- /inbox/{mail_id}
+- /sent
+- /sent/{mail_id}
+- /spam
+```
+
+# /inbox/{mail_id}
+
+```
+- /inbox
+- /inbox/{mail_id}
+- /sent
+- /sent/{mail_id}
+- /spam
+```
+
+# /sent
+
+```
+- /inbox
+- /inbox/{mail_id}
+- /sent
+- /sent/{mail_id}
+- /spam
+```
+
+# /sent/{mail_id}
+
+```
+- /inbox
+- /inbox/{mail_id}
+- /sent
+- /sent/{mail_id}
+- /spam
+```
+
+# /spam
+
+```
+- /inbox
+- /inbox/{mail_id}
+- /sent
+- /sent/{mail_id}
+- /spam
+```
+
 ## Компоненты
 
 ```
